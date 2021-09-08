@@ -10,9 +10,9 @@ import com.mongodb.client.model.Filters;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class TodoAppRoute extends RouteBuilder {
@@ -68,11 +68,8 @@ public class TodoAppRoute extends RouteBuilder {
 		from("direct:findAll")
 				.to("mongodb:myDb?database=todo&collection=todos&operation=findAll&outputType=DocumentList")
 				.process(exchange -> {
-					List<Todo> todos = new ArrayList<>();
-
-					for (Object obj : exchange.getMessage().getBody(List.class)) {
-						Document document = (Document) obj;
-
+					List<Document> body = exchange.getMessage().getBody(List.class);
+					List<Todo> todos = body.stream().map(document -> {
 						Todo todo = new Todo();
 
 						todo._id = document.get("_id").toString();
@@ -82,8 +79,8 @@ public class TodoAppRoute extends RouteBuilder {
 						todo.order = document.get("order", Integer.class);
 						todo.completed = document.get("completed", Boolean.class);
 
-						todos.add(todo);
-					}
+						return todo;
+					}).collect(Collectors.toList());
 
 					exchange.getMessage().setBody(todos);
 				}).endRest();

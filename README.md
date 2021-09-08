@@ -1,5 +1,14 @@
 # camel-todo-app Project
 
+compile the project with
+```shell script
+./mvnw compile quarkus:dev
+```
+
+run the project by navigating to http://localhost:8080/todo.html
+
+quarkus:dev will spin up a mongodb for you automatically by using testcontainers.
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
