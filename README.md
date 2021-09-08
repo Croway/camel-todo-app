@@ -9,6 +9,15 @@ run the project by navigating to http://localhost:8080/todo.html
 
 quarkus:dev will spin up a mongodb for you automatically by using testcontainers.
 
+### TODO
+
+* Bean validation
+* test
+* batch insert with xml files, frontend will need changes too (upload button)
+* ...
+
+--
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
