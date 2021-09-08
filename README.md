@@ -11,6 +11,11 @@ quarkus:dev will spin up a mongodb for you automatically by using testcontainers
 
 ### TODO
 
+* Solve native compilation issue, when creating a new todo this error appears but the Todo class has a no arg constructor and all args one
+```
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `com.redhat.Todo` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+ at [Source: (ByteArrayInputStream); line: 1, column: 2]
+```
 * Bean validation
 * test
 * batch insert with xml files, frontend will need changes too (upload button)

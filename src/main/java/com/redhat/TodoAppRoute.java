@@ -58,7 +58,7 @@ public class TodoAppRoute extends RouteBuilder {
 				.process(exchange -> {
 					Todo todo = exchange.getMessage().getBody(Todo.class);
 
-					todo._id = UUID.randomUUID().toString();
+					todo.set_id(UUID.randomUUID().toString());
 
 					exchange.getMessage().setBody(todo);
 				})
@@ -72,12 +72,12 @@ public class TodoAppRoute extends RouteBuilder {
 					List<Todo> todos = body.stream().map(document -> {
 						Todo todo = new Todo();
 
-						todo._id = document.get("_id").toString();
-						todo.id = document.get("_id").toString();
-						todo.url = document.get("url", String.class);
-						todo.title = document.get("title", String.class);
-						todo.order = document.get("order", Integer.class);
-						todo.completed = document.get("completed", Boolean.class);
+						todo.set_id(document.get("_id").toString());
+						todo.setId(document.get("_id").toString());
+						todo.setUrl(document.get("url", String.class));
+						todo.setTitle(document.get("title", String.class));
+						todo.setOrder(document.get("order", Integer.class));
+						todo.setCompleted(document.get("completed", Boolean.class));
 
 						return todo;
 					}).collect(Collectors.toList());
